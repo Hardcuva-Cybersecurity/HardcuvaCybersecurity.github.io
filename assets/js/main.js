@@ -1,78 +1,73 @@
-// Scroll reveal animation
-const revealElements = document.querySelectorAll('.card, .step, .about-image, .hero-content');
+// ... (keep mobile menu, smooth scroll, navbar scroll code)
 
-const revealOnScroll = () => {
-    const triggerBottom = window.innerHeight * 0.85;
+// Form Submission Feedback
+const form = document.getElementById('contactForm');
+const status = document.getElementById('formStatus');
 
-    revealElements.forEach(el => {
-        const boxTop = el.getBoundingClientRect().top;
-        if(boxTop < triggerBottom){
-            el.classList.add('active');
-        } else {
-            el.classList.remove('active');
+form.addEventListener('submit', function(e) {
+    status.textContent = 'Sending your message...';
+    status.style.color = '#007bff';
+
+    // Optional: Full AJAX submission (uncomment if you want no page reload)
+    /*
+    e.preventDefault();
+    fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+    }).then(() => {
+        status.textContent = 'Message sent successfully! Check your email for confirmation.';
+        status.style.color = 'green';
+        form.reset();
+    }).catch(() => {
+        status.textContent = 'Error sending message. Please try again.';
+        status.style.color = 'red';
+    });
+    */
+});
+
+// Mobile Menu Toggle
+const mobileToggle = document.getElementById('mobileMenuToggle');
+const navLinks = document.querySelector('.nav-links');
+
+mobileToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+    const icon = mobileToggle.querySelector('i');
+    icon.classList.toggle('fa-bars');
+    icon.classList.toggle('fa-times');
+});
+
+// Smooth Scrolling
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            window.scrollTo({
+                top: target.offsetTop - 80,
+                behavior: 'smooth'
+            });
+            if (navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+                mobileToggle.querySelector('i').classList.replace('fa-times', 'fa-bars');
+            }
         }
     });
-};
+});
 
-window.addEventListener('scroll', revealOnScroll);
-revealOnScroll();
-
-// Form submission via Formspree
-const form = document.getElementById('contact-form');
-const formMessage = document.querySelector('.form-message');
-
-form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const formData = new FormData(form);
-
-    try {
-        const response = await fetch(form.action, {
-            method: 'POST',
-            body: formData,
-            headers: { 'Accept': 'application/json' }
-        });
-
-        if(response.ok){
-            formMessage.textContent = 'Thank you! Your message has been sent.';
-            form.reset();
-        } else {
-            formMessage.textContent = 'Oops! There was a problem. Please try again.';
-        }
-    } catch(error){
-        formMessage.textContent = 'Oops! There was a problem. Please try again.';
+// Navbar Scroll Effect
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+        document.querySelector('.header').classList.add('scrolled');
+    } else {
+        document.querySelector('.header').classList.remove('scrolled');
     }
 });
 
-// Smooth scroll for nav links
-const navLinks = document.querySelectorAll('.nav-links a');
-navLinks.forEach(link => {
-    link.addEventListener('click', e => {
-        e.preventDefault();
-        const targetId = link.getAttribute('href').substring(1);
-        const targetSection = document.getElementById(targetId);
-        targetSection.scrollIntoView({ behavior: 'smooth' });
-    });
-});
+// Form Feedback
+const form = document.getElementById('contactForm');
+const status = document.getElementById('formStatus');
 
-// Checkbox interaction animation
-const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-checkboxes.forEach(box => {
-    box.addEventListener('change', () => {
-        if(box.checked){
-            box.parentElement.style.background = '#1f2933';
-            box.parentElement.style.borderLeft = '4px solid #38bdf8';
-        } else {
-            box.parentElement.style.background = 'transparent';
-            box.parentElement.style.borderLeft = 'none';
-        }
-    });
-});
-
-// Budget select animation
-const budgetSelect = document.getElementById('budget');
-budgetSelect.addEventListener('change', () => {
-    budgetSelect.style.borderColor = '#fbbf24';
-    setTimeout(() => {
-        budgetSelect.style.borderColor = '#38bdf8';
-    }, 500);
+form.addEventListener('submit', function() {
+    status.textContent = 'Sending your message...';
+    status.style.color = '#007bff';
 });
