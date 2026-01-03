@@ -1,62 +1,100 @@
-body {
-  background-color: #121212;
-  color: #e0e0e0;
-  font-family: 'Inter', sans-serif;
-  line-height: 1.6;
+:root {
+  --bg: #0b0f14;
+  --card: #111827;
+  --text: #e5e7eb;
+  --muted: #9ca3af;
+  --accent: #38bdf8;
+}
+
+* {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+  font-family: system-ui, sans-serif;
 }
 
-a {
-  color: #1e90ff;
-  text-decoration: none;
+body {
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
 }
 
-header {
-  text-align: center;
-  padding: 3rem 1rem;
+/* NAV */
+.nav {
+  padding: 1.2rem 2rem;
+  border-bottom: 1px solid #1f2933;
 }
 
-h1 {
+.logo span {
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* HERO */
+.hero {
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 3rem 2rem;
+}
+
+.hero h1 {
   font-size: 2.5rem;
-  margin-bottom: 0.5rem;
-}
-
-h2 {
-  font-size: 1.5rem;
-  color: #90caf9;
   margin-bottom: 1rem;
 }
 
-h3 {
-  font-size: 1.25rem;
-  margin-top: 2rem;
+.hero p {
+  max-width: 600px;
+  color: var(--muted);
 }
 
+.cta {
+  margin-top: 1.5rem;
+  width: fit-content;
+  padding: 0.7rem 1.4rem;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  text-decoration: none;
+  border-radius: 6px;
+}
+
+/* SECTIONS */
 section {
-  padding: 2rem 1rem;
-  max-width: 800px;
-  margin: auto;
+  padding: 4rem 2rem;
 }
 
-ul {
-  list-style-type: disc;
-  margin-left: 2rem;
+h2 {
+  margin-bottom: 1.5rem;
 }
 
-.cta-button {
-  display: inline-block;
-  margin-top: 1rem;
-  padding: 0.75rem 1.5rem;
-  background-color: #1e90ff;
-  color: #fff;
-  border-radius: 8px;
-  font-weight: bold;
+/* SERVICES */
+.service-grid {
+  display: grid;
+  gap: 1.5rem;
 }
 
-footer {
-  text-align: center;
+.card {
+  background: var(--card);
   padding: 1.5rem;
-  border-top: 1px solid #333;
-  font-size: 0.9rem;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+/* PROCESS */
+.process ol {
+  padding-left: 1.2rem;
+  color: var(--muted);
+}
+
+/* FOOTER */
+.footer {
+  padding: 2rem;
+  border-top: 1px solid #1f2933;
+  text-align: center;
+  color: var(--muted);
 }
